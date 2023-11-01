@@ -1,3 +1,5 @@
+package Java_Mini_Projects;
+
 import java.util.*;
 
 public class Find_Number {

@@ -1,3 +1,5 @@
+package Java_Mini_Projects;
+
 import java.util.Scanner;
 public class Tip_Calculater {
 	public static void main(String[] args) {

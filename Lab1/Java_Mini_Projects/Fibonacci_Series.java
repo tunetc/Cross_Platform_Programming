@@ -1,4 +1,7 @@
+package Java_Mini_Projects;
+
 import java.util.Scanner;
+
 public class Fibonacci_Series {
 	public static void main(String[] args) {
 		int a = 0, b = 1;

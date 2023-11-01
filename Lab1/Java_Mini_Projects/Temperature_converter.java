@@ -1,3 +1,5 @@
+package Java_Mini_Projects;
+
 import java.util.Scanner;
 public class Temperature_converter {
 	public static void main(String[] args) {

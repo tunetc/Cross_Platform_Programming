@@ -103,7 +103,7 @@ class Collection {
         System.out.println(newMap);
 
         System.out.println("Завдання 7:");
-        List<Integer> set1 = List.of(1, 2, 3, 4, 5);
+        List<Integer> set1 = List.of(2, 8, 3, 7, 5);
         List<Integer> set2 = List.of(3, 4, 5, 6, 7);
         System.out.println(" Спільні елементи: " + seventhTask(set1, set2));
     }

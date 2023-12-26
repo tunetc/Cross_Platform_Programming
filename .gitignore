@@ -3,5 +3,5 @@
 *.iml
 *.xml
 /Lab7/cross_platform-main/target
-/Lab7/cross_platform-main/src/java/org
+/Lab7/cross_platform-main/src/main/java/org/example
 /Lab7/cross_platform-main/.idea

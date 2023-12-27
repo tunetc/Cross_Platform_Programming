@@ -10,6 +10,8 @@ import java.security.NoSuchProviderException;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 class UserServiceTest {
 
@@ -176,6 +178,19 @@ class UserServiceTest {
             assertThrows(IllegalArgumentException.class, ()->userService.createUser(user5));
         }
         catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void validateTest() throws NoSuchProviderException {
+        try {
+            Method validate = UserService.class.getDeclaredMethod("validateName", String.class);
+            validate.setAccessible(true);
+
+            validate.invoke(userService, "Aleh");
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

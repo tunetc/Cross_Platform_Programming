@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Dental-Clinic</a> &gt; <a href="index.source.html" class="el_package">com.example.Dental.Clinic.Doctor</a> &gt; <span class="el_source">DoctorService.java</span></div><h1>DoctorService.java</h1><pre class="source lang-java linenums">package com.example.Dental.Clinic.Doctor;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class DoctorService {
+
+    private final DoctorRepository doctorRepository;
+
+    @Autowired
+<span class="fc" id="L15">    public DoctorService(DoctorRepository doctorRepository) {</span>
+<span class="fc" id="L16">        this.doctorRepository = doctorRepository;</span>
+<span class="fc" id="L17">    }</span>
+
+    public DoctorEntity createDoctor(DoctorEntity doctorEntity) {
+        try {
+<span class="fc" id="L21">            return doctorRepository.save(doctorEntity);</span>
+<span class="fc" id="L22">        } catch (Exception e) {</span>
+<span class="fc" id="L23">            throw new RuntimeException(&quot;Помилка створення лікаря&quot;, e);</span>
+        }
+    }
+
+    public List&lt;DoctorEntity&gt; getAllDoctors() {
+        try {
+<span class="fc" id="L29">            return doctorRepository.findAll();</span>
+<span class="fc" id="L30">        } catch (Exception e) {</span>
+<span class="fc" id="L31">            throw new RuntimeException(&quot;Помилка отримання лікарів&quot;, e);</span>
+        }
+    }
+
+    public DoctorEntity getDoctorById(Long id) {
+        try {
+<span class="fc" id="L37">            return doctorRepository.findById(id).orElse(null);</span>
+<span class="fc" id="L38">        } catch (Exception e) {</span>
+<span class="fc" id="L39">            throw new RuntimeException(&quot;Помилка отримання лікаря з ID: &quot; + id, e);</span>
+        }
+    }
+
+    public DoctorEntity updateDoctor(Long id, DoctorEntity updatedDoctor) {
+        try {
+<span class="fc" id="L45">            DoctorEntity existingDoctor = doctorRepository.findById(id).orElse(null);</span>
+
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            if (existingDoctor != null) {</span>
+<span class="fc" id="L48">                existingDoctor.setName(updatedDoctor.getName());</span>
+<span class="fc" id="L49">                existingDoctor.setSpecialization(updatedDoctor.getSpecialization());</span>
+<span class="fc" id="L50">                existingDoctor.setClinic(updatedDoctor.getClinic());</span>
+<span class="fc" id="L51">                return doctorRepository.save(existingDoctor);</span>
+            } else {
+<span class="fc" id="L53">                throw new RuntimeException(&quot;Лікаря не знайдено ID: &quot; + id);</span>
+            }
+<span class="fc" id="L55">        } catch (Exception e) {</span>
+<span class="fc" id="L56">            throw new RuntimeException(&quot;Помилка оновлення лікаря з ID: &quot; + id, e);</span>
+        }
+    }
+
+    public void deleteDoctor(Long id) {
+        try {
+<span class="fc" id="L62">            Optional&lt;DoctorEntity&gt; optionalDoctor = doctorRepository.findById(id);</span>
+
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            if (optionalDoctor.isPresent()) {</span>
+<span class="fc" id="L65">                doctorRepository.deleteById(id);</span>
+            } else {
+<span class="fc" id="L67">                throw new RuntimeException(&quot;Лікаря не знайдено ID: &quot; + id);</span>
+            }
+<span class="fc" id="L69">        } catch (Exception e) {</span>
+<span class="fc" id="L70">            throw new RuntimeException(&quot;Помилка видалеення ID: &quot; + id, e);</span>
+<span class="fc" id="L71">        }</span>
+<span class="fc" id="L72">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

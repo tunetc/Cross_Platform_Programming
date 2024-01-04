@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Dental-Clinic</a> &gt; <a href="index.source.html" class="el_package">com.example.Dental.Clinic.Patient</a> &gt; <span class="el_source">PatientController.java</span></div><h1>PatientController.java</h1><pre class="source lang-java linenums">package com.example.Dental.Clinic.Patient;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/patients&quot;)
+public class PatientController {
+
+<span class="fc" id="L15">    private static final Logger logger = LoggerFactory.getLogger(PatientController.class);</span>
+
+    private final PatientService patientService;
+
+    @Autowired
+<span class="fc" id="L20">    public PatientController(PatientService patientService) {</span>
+<span class="fc" id="L21">        this.patientService = patientService;</span>
+<span class="fc" id="L22">    }</span>
+
+    @PostMapping
+    public PatientEntity createPatient(@RequestBody PatientEntity patientEntity) {
+<span class="fc" id="L26">        logger.info(&quot;Створення паціента: {}&quot;, patientEntity);</span>
+<span class="fc" id="L27">        return patientService.createPatient(patientEntity);</span>
+    }
+
+    @GetMapping
+    public List&lt;PatientEntity&gt; getAllPatients() {
+<span class="fc" id="L32">        logger.info(&quot;Отримання всіх пацієнтів&quot;);</span>
+<span class="fc" id="L33">        return patientService.getAllPatients();</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public PatientEntity getPatientById(@PathVariable Long id) {
+<span class="fc" id="L38">        logger.info(&quot;Отримання пацієнта з ID: {}&quot;, id);</span>
+<span class="fc" id="L39">        return patientService.getPatientById(id);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public PatientEntity updatePatient(@PathVariable Long id, @RequestBody PatientEntity updatedPatient) {
+<span class="fc" id="L44">        logger.info(&quot;Оновлення пацієнта з ID {}: {}&quot;, id, updatedPatient);</span>
+<span class="fc" id="L45">        return patientService.updatePatient(id, updatedPatient);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public void deletePatient(@PathVariable Long id) {
+<span class="fc" id="L50">        logger.info(&quot;Видалення пацієнта з ID: {}&quot;, id);</span>
+<span class="fc" id="L51">        patientService.deletePatient(id);</span>
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

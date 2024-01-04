@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="uk"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Dental-Clinic</a> &gt; <a href="index.source.html" class="el_package">com.example.Dental.Clinic.Doctor</a> &gt; <span class="el_source">DoctorController.java</span></div><h1>DoctorController.java</h1><pre class="source lang-java linenums">package com.example.Dental.Clinic.Doctor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/doctors&quot;)
+public class DoctorController {
+
+<span class="fc" id="L15">    private static final Logger logger = LoggerFactory.getLogger(DoctorController.class);</span>
+
+    private final DoctorService doctorService;
+
+    @Autowired
+<span class="fc" id="L20">    public DoctorController(DoctorService doctorService) {</span>
+<span class="fc" id="L21">        this.doctorService = doctorService;</span>
+<span class="fc" id="L22">    }</span>
+
+    @PostMapping
+    public DoctorEntity createDoctor(@RequestBody DoctorEntity doctorEntity) {
+<span class="fc" id="L26">        logger.info(&quot;Створення лікаря: {}&quot;, doctorEntity);</span>
+<span class="fc" id="L27">        return doctorService.createDoctor(doctorEntity);</span>
+    }
+
+    @GetMapping
+    public List&lt;DoctorEntity&gt; getAllDoctors() {
+<span class="fc" id="L32">        logger.info(&quot;Отримання всіх лікарів&quot;);</span>
+<span class="fc" id="L33">        return doctorService.getAllDoctors();</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public DoctorEntity getDoctorById(@PathVariable Long id) {
+<span class="fc" id="L38">        logger.info(&quot;Отримання лікаря по ID: {}&quot;, id);</span>
+<span class="fc" id="L39">        return doctorService.getDoctorById(id);</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public DoctorEntity updateDoctor(@PathVariable Long id, @RequestBody DoctorEntity updatedDoctor) {
+<span class="fc" id="L44">        logger.info(&quot;Оновлення лікаря з ID {}: {}&quot;, id, updatedDoctor);</span>
+<span class="fc" id="L45">        return doctorService.updateDoctor(id, updatedDoctor);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public void deleteDoctor(@PathVariable Long id) {
+<span class="fc" id="L50">        logger.info(&quot;Видалення лікаря з ID: {}&quot;, id);</span>
+<span class="fc" id="L51">        doctorService.deleteDoctor(id);</span>
+<span class="fc" id="L52">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

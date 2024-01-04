@@ -1,0 +1,7 @@
+com\example\Dental\Clinic\Clinic\ClinicServiceTest.class
+com\example\Dental\Clinic\Doctor\DoctorServiceTest.class
+com\example\Dental\Clinic\DentalClinicApplicationTests.class
+com\example\Dental\Clinic\Clinic\ClinicControllerTest.class
+com\example\Dental\Clinic\Patient\PatientControllerTest.class
+com\example\Dental\Clinic\Patient\PatientServiceTest.class
+com\example\Dental\Clinic\Doctor\DoctorControllerTest.class

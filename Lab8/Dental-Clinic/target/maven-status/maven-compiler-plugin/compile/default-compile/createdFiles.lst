@@ -1,0 +1,13 @@
+com\example\Dental\Clinic\Patient\PatientRepository.class
+com\example\Dental\Clinic\Doctor\DoctorEntity.class
+com\example\Dental\Clinic\Doctor\DoctorRepository.class
+com\example\Dental\Clinic\Doctor\DoctorService.class
+com\example\Dental\Clinic\Patient\PatientController.class
+com\example\Dental\Clinic\Doctor\DoctorController.class
+com\example\Dental\Clinic\Patient\PatientService.class
+com\example\Dental\Clinic\Clinic\ClinicController.class
+com\example\Dental\Clinic\DentalClinicApplication.class
+com\example\Dental\Clinic\Clinic\ClinicRepository.class
+com\example\Dental\Clinic\Clinic\ClinicService.class
+com\example\Dental\Clinic\Clinic\ClinicEntity.class
+com\example\Dental\Clinic\Patient\PatientEntity.class

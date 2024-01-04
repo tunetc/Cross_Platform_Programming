@@ -1,4 +1,4 @@
-package com.example.Dental.Clinic.Doctor;
+package com.example.Dental.Clinic.Patient;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,79 +12,78 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class DoctorControllerTest {
+class PatientControllerTest {
 
     @Mock
-    private DoctorService doctorService;
+    private PatientService patientService;
 
     @InjectMocks
-    private DoctorController doctorController;
+    private PatientController patientController;
 
     @Test
-    void testCreateDoctor() {
-        DoctorEntity doctorEntity = new DoctorEntity();
-        when(doctorService.createDoctor(any())).thenReturn(doctorEntity);
+    void testCreatePatient() {
+        PatientEntity patientEntity = new PatientEntity();
+        when(patientService.createPatient(any())).thenReturn(patientEntity);
 
-        DoctorEntity result = doctorController.createDoctor(doctorEntity);
+        PatientEntity result = patientController.createPatient(patientEntity);
 
         assertNotNull(result);
-
-        verify(doctorService, times(1)).createDoctor(doctorEntity);
     }
 
     @Test
-    void testGetAllDoctors() {
-        DoctorEntity doctor1 = new DoctorEntity();
-        DoctorEntity doctor2 = new DoctorEntity();
-        List<DoctorEntity> doctorEntities = List.of(doctor1, doctor2);
+    void testGetAllPatients() {
+        PatientEntity patient1 = new PatientEntity();
+        PatientEntity patient2 = new PatientEntity();
+        List<PatientEntity> patientEntities = List.of(patient1, patient2);
 
-        when(doctorService.getAllDoctors()).thenReturn(doctorEntities);
+        when(patientService.getAllPatients()).thenReturn(patientEntities);
 
-        List<DoctorEntity> result = doctorController.getAllDoctors();
+        List<PatientEntity> result = patientController.getAllPatients();
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals(doctorEntities, result);
+        assertEquals(patientEntities, result);
 
-        verify(doctorService, times(1)).getAllDoctors();
+        verify(patientService, times(1)).getAllPatients();
     }
 
     @Test
-    void testGetDoctorById() {
-        Long doctorId = 1L;
-        DoctorEntity doctorEntity = new DoctorEntity();
+    void testGetPatientById() {
+        Long patientId = 1L;
+        PatientEntity patientEntity = new PatientEntity();
 
-        when(doctorService.getDoctorById(doctorId)).thenReturn(doctorEntity);
+        when(patientService.getPatientById(patientId)).thenReturn(patientEntity);
 
-        DoctorEntity result = doctorController.getDoctorById(doctorId);
+        PatientEntity result = patientController.getPatientById(patientId);
 
         assertNotNull(result);
-        assertEquals(doctorEntity, result);
+        assertEquals(patientEntity, result);
 
-        verify(doctorService, times(1)).getDoctorById(doctorId);
+        verify(patientService, times(1)).getPatientById(patientId);
     }
 
     @Test
-    void testUpdateDoctor() {
-        Long doctorId = 1L;
-        DoctorEntity updatedDoctor = new DoctorEntity();
+    void testUpdatePatient() {
+        Long patientId = 1L;
+        PatientEntity existingPatient = new PatientEntity();
+        PatientEntity updatedPatient = new PatientEntity();
 
-        when(doctorService.updateDoctor(doctorId, updatedDoctor)).thenReturn(updatedDoctor);
+        when(patientService.updatePatient(patientId, updatedPatient)).thenReturn(updatedPatient);
 
-        DoctorEntity result = doctorController.updateDoctor(doctorId, updatedDoctor);
+        PatientEntity result = patientController.updatePatient(patientId, updatedPatient);
 
         assertNotNull(result);
-        assertEquals(updatedDoctor, result);
+        assertEquals(updatedPatient, result);
 
-        verify(doctorService, times(1)).updateDoctor(doctorId, updatedDoctor);
+        verify(patientService, times(1)).updatePatient(patientId, updatedPatient);
     }
 
     @Test
-    void testDeleteDoctor() {
-        Long doctorId = 1L;
+    void testDeletePatient() {
+        Long patientId = 1L;
 
-        assertDoesNotThrow(() -> doctorController.deleteDoctor(doctorId));
+        assertDoesNotThrow(() -> patientController.deletePatient(patientId));
 
-        verify(doctorService, times(1)).deleteDoctor(doctorId);
+        verify(patientService, times(1)).deletePatient(patientId);
     }
 }

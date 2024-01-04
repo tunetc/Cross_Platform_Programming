@@ -1,45 +1,47 @@
 package com.example.Dental.Clinic.Patient;
 
-import com.example.Dental.Clinic.Clinic.ClinicEntity;
+import com.example.Dental.Clinic.Doctor.DoctorEntity;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Doctor")
-public class DoctorEntity {
+@Table(name = "Patient")
+public class PatientEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "doctor_id")
-    private Long doctorId;
+    @Column(name = "patient_id")
+    private Long patientId;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "specialization")
-    private String specialization;
+    @Column(name = "age")
+    private int age;
+
+    @Column(name = "sex", length = 1)
+    private char sex;
 
     @ManyToOne
-    @JoinColumn(name = "clinic_id")
-    private ClinicEntity clinic;
+    @JoinColumn(name = "doctor_id")
+    private DoctorEntity doctor;
 
-    // Constructors, getters, and setters
-
-    public DoctorEntity() {
-        // Default constructor needed by JPA
+    public PatientEntity() {
     }
 
-    public DoctorEntity(String name, String specialization, ClinicEntity clinic) {
+    public PatientEntity(String name, int age, char sex, DoctorEntity doctor) {
         this.name = name;
-        this.specialization = specialization;
-        this.clinic = clinic;
+        this.age = age;
+        this.sex = sex;
+        this.doctor = doctor;
     }
 
-    public Long getDoctorId() {
-        return doctorId;
+    public Long getPatientId() {
+        return patientId;
     }
 
-    public void setDoctorId(Long doctorId) {
-        this.doctorId = doctorId;
+    public void setPatientId(Long patientId) {
+        this.patientId = patientId;
     }
 
     public String getName() {
@@ -50,31 +52,27 @@ public class DoctorEntity {
         this.name = name;
     }
 
-    public String getSpecialization() {
-        return specialization;
+    public int getAge() {
+        return age;
     }
 
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public ClinicEntity getClinic() {
-        return clinic;
+    public char getSex() {
+        return sex;
     }
 
-    public void setClinic(ClinicEntity clinic) {
-        this.clinic = clinic;
+    public void setSex(char sex) {
+        this.sex = sex;
     }
 
-    @Override
-    public String toString() {
-        return "DoctorEntity{" +
-                "doctorId=" + doctorId +
-                ", name='" + name + '\'' +
-                ", specialization='" + specialization + '\'' +
-                ", clinic=" + clinic +
-                '}';
+    public DoctorEntity getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(DoctorEntity doctor) {
+        this.doctor = doctor;
     }
 }
-
-

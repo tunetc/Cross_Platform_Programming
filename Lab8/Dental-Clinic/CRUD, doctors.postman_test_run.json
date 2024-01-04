@@ -1,0 +1,460 @@
+{
+	"id": "508a48c5-4ea6-43d3-a239-9f221a99af11",
+	"name": "CRUD, doctors",
+	"timestamp": "2024-01-04T19:33:02.215Z",
+	"collection_id": "24401321-51621afa-9d62-47fc-89ff-0d891f1acce1",
+	"folder_id": 0,
+	"environment_id": "24401321-0e5adaa7-94ff-4554-9a5b-3a7e88b05e7d",
+	"totalPass": 20,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-01-04T19:33:00.871Z",
+	"totalFail": 3,
+	"results": [
+		{
+			"id": "58c391e1-9d9b-4517-af90-cb01ab14ae9b",
+			"name": "Get clinics",
+			"url": "http://localhost:8080/clinics",
+			"time": 5,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Статус код 200": true,
+				"Тіло є масивом": true,
+				"Тип вмісту - json": true,
+				"Обов'язкові поля": true,
+				"Очікувана кількість клінік = 2": false
+			},
+			"testPassFailCounts": {
+				"Статус код 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Тіло є масивом": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Тип вмісту - json": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Обов'язкові поля": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Очікувана кількість клінік = 2": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Статус код 200": true,
+					"Тіло є масивом": true,
+					"Тип вмісту - json": true,
+					"Обов'язкові поля": true,
+					"Очікувана кількість клінік = 2": false
+				}
+			]
+		},
+		{
+			"id": "76796689-2142-4df8-96c9-3fbf1f316da7",
+			"name": "Get doctors",
+			"url": "http://localhost:8080/doctors",
+			"time": 17,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				17
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "f5a834c4-b455-4008-961e-2ef3b7dd1187",
+			"name": "Get patients",
+			"url": "http://localhost:8080/patients",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "e693ad5f-8633-4f20-aee0-8aad686c9a42",
+			"name": "Post clinics",
+			"url": "http://localhost:8080/clinics",
+			"time": 60,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Клініку створено": true,
+				"Має відповідні дані про клініку": true,
+				"Перевірка чи поле location не пусте": true
+			},
+			"testPassFailCounts": {
+				"Клініку створено": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Має відповідні дані про клініку": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Перевірка чи поле location не пусте": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				60
+			],
+			"allTests": [
+				{
+					"Клініку створено": true,
+					"Має відповідні дані про клініку": true,
+					"Перевірка чи поле location не пусте": true
+				}
+			]
+		},
+		{
+			"id": "f8298d3b-8453-4e89-8db2-417d5e2cdf02",
+			"name": "Post doctors",
+			"url": "http://localhost:8080/doctors",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "5122a82d-1f7b-4424-94ac-f539c7229bc1",
+			"name": "Post patients",
+			"url": "http://localhost:8080/patients",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "228afa45-42f0-4d1e-92b7-e60be9393733",
+			"name": "Update clinics",
+			"url": "http://localhost:8080/clinics/2",
+			"time": 23,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Клініку оновлно": true,
+				"Поля клініки name і location є рядками": true,
+				"Поля клініки name і location не пусті": true
+			},
+			"testPassFailCounts": {
+				"Клініку оновлно": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Поля клініки name і location є рядками": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Поля клініки name і location не пусті": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				23
+			],
+			"allTests": [
+				{
+					"Клініку оновлно": true,
+					"Поля клініки name і location є рядками": true,
+					"Поля клініки name і location не пусті": true
+				}
+			]
+		},
+		{
+			"id": "67bad778-49c0-41b7-af78-85825ee54d5b",
+			"name": "Update doctors",
+			"url": "http://localhost:8080/doctors/3",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful PUT request": true
+			},
+			"testPassFailCounts": {
+				"Successful PUT request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Successful PUT request": true
+				}
+			]
+		},
+		{
+			"id": "37d094c7-63e4-47a2-81b5-938874590aea",
+			"name": "Update patients",
+			"url": "http://localhost:8080/patients/6",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful PUT request": true
+			},
+			"testPassFailCounts": {
+				"Successful PUT request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Successful PUT request": true
+				}
+			]
+		},
+		{
+			"id": "a163e31f-f6f8-48c7-8697-b02a193bffee",
+			"name": "Delete clinics",
+			"url": "http://localhost:8080/clinics/3",
+			"time": 47,
+			"responseCode": {
+				"code": 500,
+				"name": "Internal Server Error"
+			},
+			"tests": {
+				"Клініку видалено": false,
+				"Перевірка чи тіло пусте після видалення": false,
+				"Перевірка чи ID немає в тілі": true,
+				"Перевірка чи клініка є в БД": true
+			},
+			"testPassFailCounts": {
+				"Клініку видалено": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Перевірка чи тіло пусте після видалення": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Перевірка чи ID немає в тілі": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Перевірка чи клініка є в БД": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				47
+			],
+			"allTests": [
+				{
+					"Клініку видалено": false,
+					"Перевірка чи тіло пусте після видалення": false,
+					"Перевірка чи ID немає в тілі": true,
+					"Перевірка чи клініка є в БД": true
+				}
+			]
+		},
+		{
+			"id": "cd3b0241-9baa-4ca9-98fb-12dce57d1d0a",
+			"name": "Delete doctors",
+			"url": "http://localhost:8080/doctors/5",
+			"time": 9,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				9
+			],
+			"allTests": [
+				{
+					"Successful DELETE request": true
+				}
+			]
+		},
+		{
+			"id": "7aeae80f-59b8-41f0-9b52-bc3415da31a8",
+			"name": "Delete patients",
+			"url": "http://localhost:8080/patients/6",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Successful DELETE request": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 202,
+	"collection": {
+		"requests": [
+			{
+				"id": "58c391e1-9d9b-4517-af90-cb01ab14ae9b",
+				"method": "GET"
+			},
+			{
+				"id": "76796689-2142-4df8-96c9-3fbf1f316da7",
+				"method": "GET"
+			},
+			{
+				"id": "f5a834c4-b455-4008-961e-2ef3b7dd1187",
+				"method": "GET"
+			},
+			{
+				"id": "e693ad5f-8633-4f20-aee0-8aad686c9a42",
+				"method": "POST"
+			},
+			{
+				"id": "f8298d3b-8453-4e89-8db2-417d5e2cdf02",
+				"method": "POST"
+			},
+			{
+				"id": "5122a82d-1f7b-4424-94ac-f539c7229bc1",
+				"method": "POST"
+			},
+			{
+				"id": "228afa45-42f0-4d1e-92b7-e60be9393733",
+				"method": "PUT"
+			},
+			{
+				"id": "67bad778-49c0-41b7-af78-85825ee54d5b",
+				"method": "PUT"
+			},
+			{
+				"id": "37d094c7-63e4-47a2-81b5-938874590aea",
+				"method": "PUT"
+			},
+			{
+				"id": "a163e31f-f6f8-48c7-8697-b02a193bffee",
+				"method": "DELETE"
+			},
+			{
+				"id": "cd3b0241-9baa-4ca9-98fb-12dce57d1d0a",
+				"method": "DELETE"
+			},
+			{
+				"id": "7aeae80f-59b8-41f0-9b52-bc3415da31a8",
+				"method": "DELETE"
+			}
+		]
+	}
+}

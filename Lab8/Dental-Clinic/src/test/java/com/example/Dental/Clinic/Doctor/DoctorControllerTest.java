@@ -1,4 +1,4 @@
-package com.example.Dental.Clinic.Clinic;
+package com.example.Dental.Clinic.Doctor;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,79 +12,79 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ClinicControllerTest {
+class DoctorControllerTest {
 
     @Mock
-    private ClinicService clinicService;
+    private DoctorService doctorService;
 
     @InjectMocks
-    private ClinicController clinicController;
+    private DoctorController doctorController;
 
     @Test
-    void testCreateClinic() {
-        ClinicEntity clinicEntity = new ClinicEntity();
-        when(clinicService.createClinic(any())).thenReturn(clinicEntity);
+    void testCreateDoctor() {
+        DoctorEntity doctorEntity = new DoctorEntity();
+        when(doctorService.createDoctor(any())).thenReturn(doctorEntity);
 
-        ClinicEntity result = clinicController.createClinic(clinicEntity);
+        DoctorEntity result = doctorController.createDoctor(doctorEntity);
 
         assertNotNull(result);
 
-        verify(clinicService, times(1)).createClinic(clinicEntity);
+        verify(doctorService, times(1)).createDoctor(doctorEntity);
     }
 
     @Test
-    void testGetAllClinics() {
-        ClinicEntity clinic1 = new ClinicEntity();
-        ClinicEntity clinic2 = new ClinicEntity();
-        List<ClinicEntity> clinicEntities = List.of(clinic1, clinic2);
+    void testGetAllDoctors() {
+        DoctorEntity doctor1 = new DoctorEntity();
+        DoctorEntity doctor2 = new DoctorEntity();
+        List<DoctorEntity> doctorEntities = List.of(doctor1, doctor2);
 
-        when(clinicService.getAllClinics()).thenReturn(clinicEntities);
+        when(doctorService.getAllDoctors()).thenReturn(doctorEntities);
 
-        List<ClinicEntity> result = clinicController.getAllClinics();
+        List<DoctorEntity> result = doctorController.getAllDoctors();
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals(clinicEntities, result);
+        assertEquals(doctorEntities, result);
 
-        verify(clinicService, times(1)).getAllClinics();
+        verify(doctorService, times(1)).getAllDoctors();
     }
 
     @Test
-    void testGetClinicById() {
-        Long clinicId = 1L;
-        ClinicEntity clinicEntity = new ClinicEntity();
+    void testGetDoctorById() {
+        Long doctorId = 1L;
+        DoctorEntity doctorEntity = new DoctorEntity();
 
-        when(clinicService.getClinicById(clinicId)).thenReturn(clinicEntity);
+        when(doctorService.getDoctorById(doctorId)).thenReturn(doctorEntity);
 
-        ClinicEntity result = clinicController.getClinicById(clinicId);
+        DoctorEntity result = doctorController.getDoctorById(doctorId);
 
         assertNotNull(result);
-        assertEquals(clinicEntity, result);
+        assertEquals(doctorEntity, result);
 
-        verify(clinicService, times(1)).getClinicById(clinicId);
+        verify(doctorService, times(1)).getDoctorById(doctorId);
     }
 
     @Test
-    void testUpdateClinic() {
-        Long clinicId = 1L;
-        ClinicEntity updatedClinic = new ClinicEntity();
+    void testUpdateDoctor() {
+        Long doctorId = 1L;
+        DoctorEntity updatedDoctor = new DoctorEntity();
 
-        when(clinicService.updateClinic(clinicId, updatedClinic)).thenReturn(updatedClinic);
+        when(doctorService.updateDoctor(doctorId, updatedDoctor)).thenReturn(updatedDoctor);
 
-        ClinicEntity result = clinicController.updateClinic(clinicId, updatedClinic);
+        DoctorEntity result = doctorController.updateDoctor(doctorId, updatedDoctor);
 
         assertNotNull(result);
-        assertEquals(updatedClinic, result);
+        assertEquals(updatedDoctor, result);
 
-        verify(clinicService, times(1)).updateClinic(clinicId, updatedClinic);
+        verify(doctorService, times(1)).updateDoctor(doctorId, updatedDoctor);
     }
 
     @Test
-    void testDeleteClinic() {
-        Long clinicId = 1L;
+    void testDeleteDoctor() {
+        Long doctorId = 1L;
 
-        assertDoesNotThrow(() -> clinicController.deleteClinic(clinicId));
+        assertDoesNotThrow(() -> doctorController.deleteDoctor(doctorId));
 
-        verify(clinicService, times(1)).deleteClinic(clinicId);
+        verify(doctorService, times(1)).deleteDoctor(doctorId);
     }
 }

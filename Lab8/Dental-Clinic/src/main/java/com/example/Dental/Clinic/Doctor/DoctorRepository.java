@@ -1,9 +1,9 @@
-package com.example.Dental.Clinic.Clinic;
+package com.example.Dental.Clinic.Doctor;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ClinicRepository extends JpaRepository<ClinicEntity, Long> {
+public interface DoctorRepository extends JpaRepository<DoctorEntity, Long> {
 
 }

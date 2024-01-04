@@ -1,40 +1,49 @@
-package com.example.Dental.Clinic.Clinic;
+package com.example.Dental.Clinic.Doctor;
+import com.example.Dental.Clinic.Clinic.ClinicEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "Clinic")
-public class ClinicEntity {
+@Table(name = "Doctor")
+public class DoctorEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "clinic_id")
-    private Long clinicId;
+    @Column(name = "doctor_id")
+    private Long doctorId;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "location")
-    private String location;
+    @Column(name = "specialization")
+    private String specialization;
 
-    public ClinicEntity() {
+    @ManyToOne
+    @JoinColumn(name = "clinic_id")
+    private ClinicEntity clinic;
+
+    public DoctorEntity() {
     }
 
-    public ClinicEntity(String name, String location) {
+    public DoctorEntity(String name, String specialization, ClinicEntity clinic) {
         this.name = name;
-        this.location = location;
+        this.specialization = specialization;
+        this.clinic = clinic;
     }
 
-    public Long getClinicId() {
-        return clinicId;
+    public Long getDoctorId() {
+        return doctorId;
     }
 
-    public void setClinicId(Long clinicId) {
-        this.clinicId = clinicId;
+    public void setDoctorId(Long doctorId) {
+        this.doctorId = doctorId;
     }
 
     public String getName() {
@@ -45,12 +54,20 @@ public class ClinicEntity {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
+
+    public ClinicEntity getClinic() {
+        return clinic;
+    }
+
+    public void setClinic(ClinicEntity clinic) {
+        this.clinic = clinic;
     }
 }
 

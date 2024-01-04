@@ -1,4 +1,4 @@
-package com.example.Dental.Clinic.Doctor;
+package com.example.Dental.Clinic.Patient;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,207 +11,188 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-
 @ExtendWith(MockitoExtension.class)
-class DoctorServiceTest {
+class PatientServiceTest {
 
     @Mock
-    private DoctorRepository doctorRepository;
+    private PatientRepository patientRepository;
 
     @InjectMocks
-    private DoctorService doctorService;
+    private PatientService patientService;
 
     @Test
-    void testCreateDoctor() {
-        DoctorEntity doctorEntity = new DoctorEntity();
-        when(doctorRepository.save(any())).thenReturn(doctorEntity);
+    void testCreatePatient() {
+        PatientEntity patientEntity = new PatientEntity();
+        when(patientRepository.save(any())).thenReturn(patientEntity);
 
-        DoctorEntity result = doctorService.createDoctor(doctorEntity);
+        PatientEntity result = patientService.createPatient(patientEntity);
 
         assertNotNull(result);
+    }
 
-        when(doctorRepository.save(any())).thenThrow(new RuntimeException("Симуляція помилки"));
+    @Test
+    void testCreatePatientException() {
+        PatientEntity patientEntity = new PatientEntity();
+        when(patientRepository.save(any())).thenThrow(new RuntimeException("Симуляція помилки"));
 
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.createDoctor(doctorEntity));
+                () -> patientService.createPatient(patientEntity));
 
-        assertEquals("Помилка створення лікаря", exception.getMessage());
+        assertNotNull(exception);
+        assertEquals("Помилка створення пацієнта", exception.getMessage());
         assertNotNull(exception.getCause());
     }
 
     @Test
-    void testGetAllDoctors() {
-        DoctorEntity doctor1 = new DoctorEntity();
-        DoctorEntity doctor2 = new DoctorEntity();
-        List<DoctorEntity> doctorEntities = List.of(doctor1, doctor2);
+    void testGetAllPatients() {
+        PatientEntity patient1 = new PatientEntity();
+        PatientEntity patient2 = new PatientEntity();
 
-        when(doctorRepository.findAll()).thenReturn(doctorEntities);
+        when(patientRepository.findAll()).thenReturn(List.of(patient1, patient2));
 
-        List<DoctorEntity> result = doctorService.getAllDoctors();
+        List<PatientEntity> result = patientService.getAllPatients();
 
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals(doctorEntities, result);
+        assertEquals(patient1, result.get(0));
+        assertEquals(patient2, result.get(1));
 
-        verify(doctorRepository, times(1)).findAll();
+        verify(patientRepository, times(1)).findAll();
     }
 
     @Test
-    void testGetDoctorById() {
-        Long doctorId = 1L;
-        DoctorEntity doctorEntity = new DoctorEntity();
+    void testGetAllPatientsException() {
+        when(patientRepository.findAll()).thenThrow(new RuntimeException("Симуляція помилки"));
 
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.of(doctorEntity));
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> patientService.getAllPatients());
 
-        DoctorEntity result = doctorService.getDoctorById(doctorId);
+        assertNotNull(exception);
+        assertEquals("Помилка отримання пацієнта", exception.getMessage());
+        assertNotNull(exception.getCause());
+    }
+
+    @Test
+    void testGetPatientById() {
+        Long patientId = 1L;
+        PatientEntity patientEntity = new PatientEntity();
+
+        when(patientRepository.findById(patientId)).thenReturn(Optional.of(patientEntity));
+
+        PatientEntity result = patientService.getPatientById(patientId);
 
         assertNotNull(result);
-        assertEquals(doctorEntity, result);
+        assertEquals(patientEntity, result);
 
-        verify(doctorRepository, times(1)).findById(doctorId);
+        verify(patientRepository, times(1)).findById(patientId);
     }
 
     @Test
-    void testGetDoctorByIdNotFound() {
-        Long doctorId = 1L;
+    void testGetPatientByIdException() {
+        Long patientId = 1L;
 
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.empty());
+        when(patientRepository.findById(patientId)).thenThrow(new RuntimeException("Симуляція помилки"));
 
-        DoctorEntity result = doctorService.getDoctorById(doctorId);
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> patientService.getPatientById(patientId));
+
+        assertNotNull(exception);
+        assertEquals("Помилка отримання пацієнта з ID: " + patientId, exception.getMessage());
+        assertNotNull(exception.getCause());
+
+        verify(patientRepository, times(1)).findById(patientId);
+    }
+
+    @Test
+    void testGetPatientByIdNotFound() {
+        Long patientId = 1L;
+
+        when(patientRepository.findById(patientId)).thenReturn(Optional.empty());
+
+        PatientEntity result = patientService.getPatientById(patientId);
 
         assertNull(result);
 
-        verify(doctorRepository, times(1)).findById(doctorId);
+        verify(patientRepository, times(1)).findById(patientId);
     }
 
     @Test
-    void testGetAllDoctorsException() {
-        when(doctorRepository.findAll()).thenThrow(new RuntimeException("Симуляція помилки"));
+    void testUpdatePatient() {
+        Long patientId = 1L;
+        PatientEntity existingPatient = new PatientEntity();
+        PatientEntity updatedPatient = new PatientEntity();
 
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.getAllDoctors());
+        when(patientRepository.findById(patientId)).thenReturn(Optional.of(existingPatient));
+        when(patientRepository.save(existingPatient)).thenReturn(updatedPatient);
 
-        assertNotNull(exception);
-        assertEquals("Помилка отримання лікарів", exception.getMessage());
-        assertNotNull(exception.getCause());
-
-        verify(doctorRepository, times(1)).findAll();
-    }
-
-    @Test
-    void testGetDoctorByIdException() {
-        Long doctorId = 1L;
-
-        when(doctorRepository.findById(doctorId)).thenThrow(new RuntimeException("Симуляція помилки"));
-
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.getDoctorById(doctorId));
-
-        assertNotNull(exception);
-        assertEquals("Помилка отримання лікаря з ID: " + doctorId, exception.getMessage());
-        assertNotNull(exception.getCause());
-
-        verify(doctorRepository, times(1)).findById(doctorId);
-    }
-
-
-    @Test
-    void testUpdateDoctor() {
-        Long doctorId = 1L;
-        DoctorEntity existingDoctor = new DoctorEntity();
-        DoctorEntity updatedDoctor = new DoctorEntity();
-
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.of(existingDoctor));
-        when(doctorRepository.save(any())).thenReturn(updatedDoctor);
-
-        DoctorEntity result = doctorService.updateDoctor(doctorId, updatedDoctor);
+        PatientEntity result = patientService.updatePatient(patientId, updatedPatient);
 
         assertNotNull(result);
-        assertEquals(updatedDoctor.getName(), result.getName());
-        assertEquals(updatedDoctor.getSpecialization(), result.getSpecialization());
-        assertEquals(updatedDoctor.getClinic(), result.getClinic());
+        assertEquals(updatedPatient, result);
 
-        verify(doctorRepository, times(1)).findById(doctorId);
-        verify(doctorRepository, times(1)).save(existingDoctor);
+        verify(patientRepository, times(1)).findById(patientId);
+        verify(patientRepository, times(1)).save(existingPatient);
     }
 
     @Test
-    void testUpdateDoctorNotFound() {
-        Long doctorId = 1L;
-        DoctorEntity updatedDoctor = new DoctorEntity();
+    void testUpdatePatientNotFound() {
+        Long patientId = 1L;
+        PatientEntity updatedPatient = new PatientEntity();
 
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.empty());
+        when(patientRepository.findById(patientId)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.updateDoctor(doctorId, updatedDoctor));
+                () -> patientService.updatePatient(patientId, updatedPatient));
 
         assertNotNull(exception);
-        assertEquals("Помилка оновлення лікаря з ID: " + doctorId, exception.getMessage());
+        assertEquals("Помилка оновлення пацієна з ID: " + patientId, exception.getMessage());
 
-        verify(doctorRepository, times(1)).findById(doctorId);
-        verify(doctorRepository, never()).save(any());
+        verify(patientRepository, times(1)).findById(patientId);
+        verify(patientRepository, never()).save(any());
     }
 
     @Test
-    void testUpdateDoctorException() {
-        Long doctorId = 1L;
-        DoctorEntity existingDoctor = new DoctorEntity();
-        DoctorEntity updatedDoctor = new DoctorEntity();
+    void testUpdatePatientException() {
+        Long patientId = 1L;
+        PatientEntity existingPatient = new PatientEntity();
+        PatientEntity updatedPatient = new PatientEntity();
 
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.of(existingDoctor));
-        when(doctorRepository.save(any())).thenThrow(new RuntimeException("Симуляція помилки"));
+        when(patientRepository.findById(patientId)).thenReturn(Optional.of(existingPatient));
+        when(patientRepository.save(existingPatient)).thenThrow(new RuntimeException("Симуляція помилки"));
 
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.updateDoctor(doctorId, updatedDoctor));
+                () -> patientService.updatePatient(patientId, updatedPatient));
 
         assertNotNull(exception);
-        assertEquals("Помилка оновлення лікаря з ID: " + doctorId, exception.getMessage());
-        assertNotNull(exception.getCause());
-    }
-
-    @Test
-    void testDeleteDoctor() {
-        Long doctorId = 1L;
-
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.of(new DoctorEntity()));
-
-        assertDoesNotThrow(() -> doctorService.deleteDoctor(doctorId));
-
-        verify(doctorRepository, times(1)).findById(doctorId);
-        verify(doctorRepository, times(1)).deleteById(doctorId);
-    }
-
-    @Test
-    void testDeleteDoctorNotFound() {
-        Long doctorId = 1L;
-
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.empty());
-
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.deleteDoctor(doctorId));
-
-        assertNotNull(exception);
-        assertEquals("Помилка видалеення ID: " + doctorId, exception.getMessage());
-
-        verify(doctorRepository, times(1)).findById(doctorId);
-        verify(doctorRepository, never()).deleteById(any());
-    }
-
-    @Test
-    void testDeleteDoctorException() {
-        Long doctorId = 1L;
-
-        when(doctorRepository.findById(doctorId)).thenReturn(Optional.of(new DoctorEntity()));
-        doThrow(new RuntimeException("Симуляція помилки")).when(doctorRepository).deleteById(doctorId);
-
-        RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> doctorService.deleteDoctor(doctorId));
-
-        assertNotNull(exception);
-        assertEquals("Помилка видалеення ID: " + doctorId, exception.getMessage());
+        assertEquals("Помилка оновлення пацієна з ID: " + patientId, exception.getMessage());
         assertNotNull(exception.getCause());
 
-        verify(doctorRepository, times(1)).findById(doctorId);
-        verify(doctorRepository, times(1)).deleteById(doctorId);
+        verify(patientRepository, times(1)).findById(patientId);
+        verify(patientRepository, times(1)).save(existingPatient);
+    }
+
+    @Test
+    void testDeletePatient() {
+        Long patientId = 1L;
+
+        assertDoesNotThrow(() -> patientService.deletePatient(patientId));
+
+        verify(patientRepository, times(1)).deleteById(patientId);
+    }
+
+    @Test
+    void testDeletePatientException() {
+        Long patientId = 1L;
+
+        doThrow(new RuntimeException("Симуляція помилки")).when(patientRepository).deleteById(patientId);
+
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> patientService.deletePatient(patientId));
+
+        assertNotNull(exception);
+        assertEquals("Помилка видалення пацієнта з ID: " + patientId, exception.getMessage());
+        assertNotNull(exception.getCause());
+
+        verify(patientRepository, times(1)).deleteById(patientId);
     }
 }
